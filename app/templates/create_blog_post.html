@@ -1,0 +1,8 @@
+<!-- app/templates/blog/create_blog_post.html -->
+<h1>Create New Blog Post</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Renders the fields in the form -->
+    <button type="submit">Submit</button>
+</form>
+<a href="{% url 'blog_index' %}">Back to Blog Index</a>
