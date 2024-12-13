@@ -9,5 +9,5 @@ urlpatterns = [
     path('blog/<int:post_id>/', views.blog_detail, name='blog_detail'),  # Blog post detail
     path('blog/delete/<int:blog_id>/', delete_blog, name='delete_blog'),
     path('submit-testimonial/', views.submit_testimonial, name='submit_testimonial'),
-
+    
 ]

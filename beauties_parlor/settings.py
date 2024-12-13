@@ -122,7 +122,9 @@ APPEND_SLASH = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-# settings.py
+LOGIN_REDIRECT_URL = 'home'  # Redirect after login
+LOGOUT_REDIRECT_URL = 'home'  # Redirect after logout
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development purposes
 
 
 import os
@@ -140,6 +142,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # You can change this to yo
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Ensure this folder exists
 ]
+
+M_PESA_CONSUMER_KEY = 'slYVhu24PL0sM0Jusyp8GTetch2eqp440Pa1YLHbGFDi4hGk'
+M_PESA_CONSUMER_SECRET = 'leHrSZV2cGvAAdaOFfRnPTZbcpNNNGA6Ed8k3GWsWeWt9jvsAeEmBrHGC1rTqE0G'
+M_PESA_SHORTCODE = '174379'
+M_PESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+M_PESA_CALLBACK_URL = 'http://yourdomain.com/callback/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -10,7 +10,7 @@ class Service(models.Model):
 
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
-    testimonial = models.TextField()
+    content = models.TextField()
     rating = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -70,14 +70,14 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
 
-class Slider(models.Model):
-    image = models.ImageField(upload_to='slider_images/')  
-    title = models.CharField(max_length=200)                
-    description = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True) 
+class CarouselItem(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to='carousel_images/')
+    link = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.title   
+        return self.title
     
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
@@ -87,4 +87,29 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title 
+    
+class Header(models.Model):
+    logo = models.ImageField(upload_to='logos/')
+    phone_number = models.CharField(max_length=15)
+    hours = models.CharField(max_length=50)
+    services = models.JSONField()
 
+class Footer(models.Model):
+    logo_text = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=15)
+    email = models.EmailField()
+    address = models.TextField()
+    social_links = models.JSONField()  # Store social links as JSON
+    useful_links = models.JSONField()   # Store useful links as JSON
+    services = models.JSONField()        # Store services as JSON
+
+    def __str__(self):
+        return self.logo_text
+
+class FeaturedService(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    icon = models.CharField(max_length=100)  # Font Awesome icon class name
+
+    def __str__(self):
+        return self.title

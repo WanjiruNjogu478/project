@@ -253,7 +253,7 @@
 }
 
 .header .logo img {
-    max-height: 36px;
+    max-height: 30px;
     margin-right: 8px;
 }
 
@@ -332,7 +332,7 @@
     .navmenu a:focus {
       color: var(--nav-color);
       padding: 18px 15px;
-      font-size: 13px;
+      font-size: 10px;
       font-family: var(--nav-font);
       font-weight: 500;
       text-transform: uppercase;
@@ -345,7 +345,7 @@
   
     .navmenu a i,
     .navmenu a:focus i {
-      font-size: 12px;
+      font-size: 10px;
       line-height: 0;
       margin-left: 5px;
       transition: 0.3s;
@@ -383,13 +383,13 @@
   
     .navmenu .dropdown ul a {
       padding: 10px 20px;
-      font-size: 15px;
+      font-size: 10px;
       text-transform: none;
       color: var(--nav-dropdown-color);
     }
   
     .navmenu .dropdown ul a i {
-      font-size: 12px;
+      font-size: 10px;
     }
   
     .navmenu .dropdown ul a:hover,
@@ -422,7 +422,7 @@
   @media (max-width: 1199px) {
     .mobile-nav-toggle {
       color: var(--nav-color);
-      font-size: 28px;
+      font-size: 20px;
       line-height: 0;
       margin-right: 10px;
       cursor: pointer;
@@ -454,7 +454,7 @@
       color: var(--nav-dropdown-color);
       padding: 10px 20px;
       font-family: var(--nav-font);
-      font-size: 17px;
+      font-size: 10px;
       font-weight: 500;
       display: flex;
       align-items: center;
@@ -465,7 +465,7 @@
   
     .navmenu a i,
     .navmenu a:focus i {
-      font-size: 12px;
+      font-size: 10px;
       line-height: 0;
       margin-left: 5px;
       width: 30px;
