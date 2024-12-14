@@ -3,6 +3,6 @@
 
 <form method="POST">
     {% csrf_token %}
-    <button type="submit">Yes, delete</button>
+    <button type="submit" style="background-color: pink; color: black;">Yes, delete</button>
     <a href="{% url 'blog_index' %}">Cancel</a>
 </form>

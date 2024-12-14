@@ -42,4 +42,6 @@ path('register/', views.register, name='register'), # Custom registration view
 path('initiate-payment/', views.initiate_payment, name='initiate_payment'),
 path('callback/', views.payment_callback, name='payment_callback'),
 path('featured-services/', featured_services, name='featured_services'),
+path('testimonials/', views.testimonials_view, name='testimonials'),
+path('submit-testimonial/', views.submit_testimonial, name='submit_testimonial'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

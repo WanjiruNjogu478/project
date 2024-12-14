@@ -501,6 +501,28 @@
         </form>
      </div>
 
+     <div class="swiper-wrapper">
+      {% for testimonial in testimonials %}
+          <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <p>
+                      <i class="bi bi-quote quote-icon-left"></i>
+                      <span>{{ testimonial.content }}</span>
+                      <i class="bi bi-quote quote-icon-right"></i>
+                  </p>
+                  <h3>{{ testimonial.name }}</h3>
+                  <div class="rating">
+                      {% for i in "12345" %}
+                          <span class="star{% if i|add:"0"|floatformat:0 == testimonial.rating %} active{% endif %}" data-value="{{ i }}">★</span>
+                      {% endfor %}
+                  </div>
+              </div>
+          </div><!-- End testimonial item -->
+      {% empty %}
+          <p>No testimonials available.</p>
+      {% endfor %}
+  </div>
+
   
       <div class="container" data-aos="fade-up" data-aos-delay="100">
   
@@ -918,7 +940,7 @@
               <label for="id_content">Content:</label>
               <textarea name="content" id="id_content" required></textarea>
   
-              <button type="submit">Submit</button>
+              <button type="submit" style="background-color: pink; color: black;">Submit</button>
           </form>
   
           <!-- Display Existing Blog Posts -->

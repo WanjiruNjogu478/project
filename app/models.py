@@ -15,7 +15,7 @@ class Testimonial(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.client_name
+        return self.name
 
 class Beautician(models.Model):
     name = models.CharField(max_length=100)
@@ -27,13 +27,17 @@ class Beautician(models.Model):
         return self.name
 
 class Appointment(models.Model):
-    client_name = models.CharField(max_length=100)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(default='example@example.com')
+    phone = models.CharField(max_length=15)
     appointment_date = models.DateTimeField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    service = models.CharField(max_length=100)  # Service type
+    beautician = models.CharField(max_length=100)  # Beautician's name
+    message = models.TextField(blank=True, null=True)  # Optional message
+    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp for creation
 
     def __str__(self):
-        return f"Appointment for {self.client_name} on {self.appointment_date}"
+        return f"{self.name} - {self.service} on {self.appointment_date.strftime('%Y-%m-%d %H:%M')}"
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)

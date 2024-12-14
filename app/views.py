@@ -9,6 +9,8 @@ import base64
 from django.conf import settings
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.http import HttpResponse
 
 def index(request):
     return render(request, 'index.html') 
@@ -44,15 +46,20 @@ def blog_create(request):
         form = BlogPostForm(request.POST)
         if form.is_valid():
             form.save()  # Save the blog post
-            return redirect('blog_index')  # Redirect to the blog index after creation
+            
+            # Fetch all blog posts to display them on the same page
+            blog_posts = BlogPost.objects.all()
+            return render(request, 'index.html', {'form': form, 'blog_posts': blog_posts})  # Render the same page with updated posts
     else:
         form = BlogPostForm()  # Display an empty form
 
-    return render(request, 'create_blog_post.html', {'form': form})
+    # Fetch all blog posts to display them when the form is displayed
+    blog_posts = BlogPost.objects.all()
+    return render(request, 'index.html', {'form': form, 'blog_posts': blog_posts})
 
 def blog_index(request):
-    posts = BlogPost.objects.all()  # Get all blog posts
-    return render(request, 'blog_index.html', {'posts': posts})
+    blog_posts = BlogPost.objects.all()  # Retrieve all blog posts
+    return render(request, 'index.html', {'blog_posts': blog_posts})
 
 def blog_detail(request, post_id):
     post = get_object_or_404(BlogPost, id=post_id)  # Get a specific post
@@ -68,23 +75,26 @@ def delete_blog(request, blog_id):
     
     return render(request, 'delete_confirm.html', {'blog_post': blog_post})
 
+@require_POST
 def submit_testimonial(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        testimonial_content = request.POST.get('testimonial')
-        rating = request.POST.get('rating')
+    name = request.POST.get('name')
+    testimonial_content = request.POST.get('testimonial')
+    rating = request.POST.get('rating')
 
-        # Validate inputs
-        if name and testimonial_content and rating:
-            testimonial = Testimonial(name=name, content=testimonial_content, rating=rating)
+    # Validate inputs
+    if name and testimonial_content and rating:
+        testimonial = Testimonial(name=name, content=testimonial_content, rating=rating)
 
-            try:
-                testimonial.save()  # Attempt to save the testimonial
-                return redirect('home')  # Redirect to home after saving
-            except Exception as e:
-                print(f"Error saving testimonial: {e}")
+        try:
+            testimonial.save()  # Attempt to save the testimonial
+            messages.success(request, "Your testimonial has been submitted successfully!")  # Success message
+        except Exception as e:
+            print(f"Error saving testimonial: {e}")
+            messages.error(request, "There was an error submitting your testimonial. Please try again.")  # Error message
+    else:
+        messages.error(request, "All fields are required.")  # Validation error message
 
-    return redirect('home')
+    return redirect('testimonials') 
 
 def register(request):
     if request.method == 'POST':
@@ -170,4 +180,8 @@ def payment_callback(request):
 def featured_services(request):
     featured_services_list = FeaturedService.objects.all()  # Fetch all featured services from the database
     return render(request, 'index.html', {'featured_services': featured_services_list})
+
+def testimonials_view(request):
+    testimonials = Testimonial.objects.all()  # Fetch all testimonials
+    return render(request, 'index.html', {'testimonials': testimonials})
 
